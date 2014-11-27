@@ -29,13 +29,13 @@ def run_query(query):
 def getActualShift():
 	query = "SELECT MAX(shiftno) FROM panelshifthead;"
 	data = run_query(query)
-	return data
+	return data[0][0]
 
 
 def getRate():
 	query = "SELECT rate FROM config;"
 	data = run_query(query)
-	return data
+	return data[0][0]
 
 
 def changeRate(rate):
@@ -46,7 +46,7 @@ def changeRate(rate):
 def getOpenTime():
 	query = "SELECT t_apertura FROM config;"
 	data = run_query(query)
-	return data
+	return data[0][0]
 
 
 def changeOpenTime(time):
@@ -55,9 +55,9 @@ def changeOpenTime(time):
 
 
 def getTicket():
-	query = "SELECT no_venta_act FROM cnfig;"
+	query = "SELECT no_venta_act FROM config;"
 	data = run_query(query)
-	return data
+	return data[0][0]
 
 
 def recordSale(query):
@@ -67,7 +67,7 @@ def recordSale(query):
 def existCutShift():
 	query = "SELECT hacer_corte_turno FROM config;"
 	data = run_query(query)
-	return data
+	return data[0][0]
 
 
 def deactivateCutShift():
@@ -78,19 +78,19 @@ def deactivateCutShift():
 def getTypeCutShift():
 	query = "SELECT tipo_corte FROM config;"
 	data = run_query(query)
-	return data
+	return data[0][0]
 
 
 def getTypeOfTime():
 	query = "SELECT corte_automatico FROM config;"
 	data = run_query(query)
-	return data
+	return data[0][0]
 
 
 def getTimeAutomaCut():
 	query = "SELECT tiempo_corte FROM config;"
 	data = run_query(query)
-	return data
+	return data[0][0]
 
 
 def startShift(numShift, startDate, amount):
@@ -109,5 +109,17 @@ def cutShift(amount):
 	startShift(newshift, dateendshift,amount)
 	query = "UPDATE config SET shift_no_act = "+str(newshift)+""
 	run_query(query)
+
+
+def idpanelServices():
+    query = "SELECT servicesdetailid from servicesdetail  ORDER BY servicesdetailid DESC limit 1;"
+    data = run_query(query)
+    if len(data) == 0:
+        data = '0'
+    else:
+        data = data[0][0]
+        data = int(data) +  1
+    return data
+
 
 

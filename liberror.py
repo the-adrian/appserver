@@ -14,7 +14,7 @@ def registroError(msgError):
         return
     elif msgError == "Initializing system.":
         logger.debug('initializing system')
-        fecha = libgral.FechaHora()
+        fecha = libgral.getAllDate()
         texto = str(fecha) + "hrs. " + "Inicializando sistema."
         sms.MSG(texto)
         return
@@ -53,7 +53,7 @@ def registroError(msgError):
         return
     elif msgError == "0x1110":
         logger.error("flight deck open")
-        fecha = libgral.FechaHora()
+        fecha = libgral.getAllDate()
         texto = str(fecha) + "hrs. " + "Palanca de rechazo accionada."
         #sms.MSG(texto)
         return
@@ -62,7 +62,7 @@ def registroError(msgError):
         return
     elif msgError == "0x1130":
         logger.error("coin jam in sensor")
-        fecha = libgral.FechaHora()
+        fecha = libgral.getAllDate()
         texto = str(fecha) + "hrs. " + "Moneda atascada en sensor."
         #sms.MSG(texto)
         return
@@ -90,7 +90,7 @@ def registroError(msgError):
         return
     elif msgError == "0x1230":
         logger.error("coins entered gate, but did not exit")
-        fecha = libgral.FechaHora()
+        fecha = libgral.getAllDate()
         texto = str(fecha) + "hrs. " + "Moneda atorada dentro de monedero."
         #sms.MSG(texto)
         return
@@ -117,7 +117,7 @@ def registroError(msgError):
         return
     elif msgError == "0x1502":
         logger.error("cassette removed")
-        fecha = libgral.FechaHora()
+        fecha = libgral.getAllDate()
         texto = str(fecha) + "hrs. " + "Cassette removido."
         #sms.MSG(texto)
         return

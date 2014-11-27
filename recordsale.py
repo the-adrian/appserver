@@ -119,7 +119,7 @@ def main(sell):
             "VALUES('" + str(shift) + "', '" + str(numSerie) + "');"
 
             servicesdetail = "INSERT INTO servicesdetail(panelservicesid, rate, multiplier, cost) VALUES(" \
-	    "'" + str(class_db.idpanelServices()) + "', " \
+	    "'" + str(classdb.idpanelServices()) + "', " \
             "'" + str(rate) + "', " \
             "'" + str(multiplier) + "'," \
             "'" + str(cost) + "');"
