@@ -100,7 +100,8 @@ def getTimeAutomaCut():
 
 def startShift(numShift, startDate, amount):
 	query = "INSERT INTO panelshifthead(shiftno, datestart, amountini) "\
-			"VALUES("+str(numShift)+", "+str(startDate)+", "+str(amount)+");"
+			"VALUES("+str(numShift)+", '"+str(startDate)+"', "+str(amount)+");"
+	print query
 	run_query(query)
 
 

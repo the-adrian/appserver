@@ -136,9 +136,9 @@ def checkAutomaticCut():
 		cut = False
 		flagtime = classdb.getTypeOfTime()
 		if flagtime == "cadaDia":
-			timecut = str(classdb.getTimeAutomaCut())
+			timecut = classdb.getTimeAutomaCut()
 			actualtime = libgral.getTime()
-			timecut = datetime.strftime(timecut, '%H:%M:%S')
+			timecut = datetime.strptime(timecut, '%H:%M:%S')
 			timecut = str(timecut).split(' ')
 			timecut = str(timecut[1])
 			if timecut == actualtime:
@@ -148,7 +148,7 @@ def checkAutomaticCut():
 			date = date.split('|')
 			day = str(date[0])
 			hour = date[1]
-			hour = datetime.strftime(hour, '%H:%M:%S')
+			hour = datetime.strptime(hour, '%H:%M:%S')
 			hour = str(hour).split(' ')
 			hour = hour[1]
 			actualday = libgral.getNameOfDay()
@@ -160,7 +160,7 @@ def checkAutomaticCut():
 			date = date.split('|')
 			day = str(date[0])
 			hour = date[1]
-			hour = datetime.strftime(hour, '%H:%M:%S')
+			hour = datetime.strptime(hour, '%H:%M:%S')
 			hour = str(hour).split(' ')
 			hour = hour[1]
 			actualday = libgral.getNameOfDay()
@@ -171,6 +171,7 @@ def checkAutomaticCut():
 			if MODE_DEBUG:
 				print "Automatic cut"
 			classdb.activateCutShift()
+			FLAG_CUT = False
 	else:
 		COUNT_CUT += 1
 	if COUNT_CUT == 6:
@@ -207,7 +208,7 @@ def __main__():
 	while True:
 		automaticcut = classdb.getTypeCutShift()
 		if automaticcut:
-			pass # Agregar la parte del corte automatico
+			checkAutomaticCut()
 		time.sleep(TIME_POLL)
 		msgsock = select.select([sock], [], [], 0.5)
 		existchangerate = existChangeRate()
@@ -250,9 +251,9 @@ def __main__():
 				elif rx.startswith(__AMOUNT__):
 					amount = libgral.separeteAmount(rx)
 					classdb.cutShift(amount)
-					sock.sendto(activeShift(), address)
+					sock.sendto(setActualShift(), address)
 					if MODE_DEBUG:
-						print "CUT SHIFT"
+						print "Cut shift"
 				elif len(rx) > 70:
 					if MODE_DEBUG:
 						print "Sale :%s" % (rx)  
