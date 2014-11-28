@@ -17,7 +17,7 @@ import libgral
 import fcntl
 
 FILE_HANDLE = None
-PATH = '/home/odroid/projects/Itlssplinux/appserver/server.py'
+PATH = '/home/odroid/projects/itlssplinux/appserver/server.py'
 
 FLAG_CUT = True
 COUNT_CUT = 0
