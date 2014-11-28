@@ -129,6 +129,58 @@ def getStatusCutShift():
 	return False
 
 
+def checkAutomaticCut():
+	global FLAG_CUT
+	global COUNT_CUT
+	if FLAG_CUT:
+		cut = False
+		flagtime = classdb.getTypeOfTime()
+		if flagtime == "cadaDia":
+			timecut = str(classdb.getTimeAutomaCut())
+			actualtime = libgral.getTime()
+			timecut = datetime.strftime(timecut, '%H:%M:%S')
+			timecut = str(timecut).split(' ')
+			timecut = str(timecut[1])
+			if timecut == actualtime:
+				cut = True
+		elif flagtime == "cadaSemana":
+			date = classdb.getTimeAutomaCut()
+			date = date.split('|')
+			day = str(date[0])
+			hour = date[1]
+			hour = datetime.strftime(hour, '%H:%M:%S')
+			hour = str(hour).split(' ')
+			hour = hour[1]
+			actualday = libgral.getNameOfDay()
+			actualhour = libgral.getHour()
+			if day == actualday  and hour == actualhour:
+				cut = True
+		elif flagtime == "cadaMes":
+			date = classdb.getTimeAutomaCut()
+			date = date.split('|')
+			day = str(date[0])
+			hour = date[1]
+			hour = datetime.strftime(hour, '%H:%M:%S')
+			hour = str(hour).split(' ')
+			hour = hour[1]
+			actualday = libgral.getNameOfDay()
+			if day == actualday and hour == actualhour:
+				cut = True
+
+		if cut:
+			if MODE_DEBUG:
+				print "Automatic cut"
+			classdb.activateCutShift()
+	else:
+		COUNT_CUT += 1
+	if COUNT_CUT == 6:
+		FLAG_CUT = True
+		COUNT_CUT = 0
+
+
+
+# -----------------------------------------------------
+
 def __main__():
 	existchangerate = False
 	existchangeopentime = False

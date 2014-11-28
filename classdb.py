@@ -75,6 +75,11 @@ def deactivateCutShift():
 	run_query(query)
 
 
+def activateCutShift():
+	query = "UPDATE config SET hacer_corte_turno = '1';"
+	run_query(query)
+
+
 def getTypeCutShift():
 	query = "SELECT tipo_corte FROM config;"
 	data = run_query(query)
