@@ -101,12 +101,12 @@ def startShift(numShift, startDate, amount):
 
 def cutShift(amount):
 	activeshift = getActualShift()
-	dateendcute = libgral.getAllDate()
+	dateendcut = libgral.getAllDate()
 	newshift = int(activeshift) + 1
-	query = "UPDATE panelshifthead SET dateend = '"+str(deteendcut)+"', "\
+	query = "UPDATE panelshifthead SET dateend = '"+str(dateendcut)+"', "\
 			"amountend = "+str(amount)+" WHERE shiftno = "+str(activeshift)+";"
 	run_query(query)
-	startShift(newshift, dateendshift,amount)
+	startShift(newshift, dateendcut,amount)
 	query = "UPDATE config SET shift_no_act = "+str(newshift)+""
 	run_query(query)
 

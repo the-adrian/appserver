@@ -124,7 +124,7 @@ def existChangeOpenTime():
 
 def getStatusCutShift():
 	data = classdb.existCutShift()
-	if data == 1:
+	if data == '1':
 		return True
 	return False
 
