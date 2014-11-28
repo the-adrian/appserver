@@ -15,6 +15,9 @@ from liberror import registroError
 from datetime import datetime
 import libgral		
 
+FILE_HANDLE = None
+PATH = '/home/odroid/projects/itlssplinux/appserver/server.py'
+
 FLAG_CUT = True
 COUNT_CUT = 0
 IP_UDP = "127.0.0.1"
@@ -64,6 +67,15 @@ def startThreadValidator():
 
 
 # ------------ FUNTIONS ----------------------
+def file_is_locked(file_path):
+    global file_handle
+    file_handle= open(file_path, 'a')
+    try:
+        fcntl.lockf(file_handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        return False
+    except IOError:
+        return True
+
 
 def setSale(sale):
 	recordsale.main(sale)
@@ -286,8 +298,11 @@ def __main__():
 
 
 if __name__=='__main__':
-		__main__()
-
+	if file_is_locked(PATH):
+      		print "can't start becouse server.py is runnig now" 
+	        sys.exit(0)
+	else:
+	     __main__()
 
 
 					
