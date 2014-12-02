@@ -240,7 +240,7 @@ def __main__():
 
 			if existchangerate:
 				sock.sendto(setRate(), address)
-				logger.debug("cambio de tarifa a "+str(ACTUAL_RATE)+"")
+				logger.debug("cambio de tarifa a $"+str(float(ACTUAL_RATE) / 100) + "0")
 
 			if existchangeopentime:
 				sock.sendto(setOpenTime(), address)
